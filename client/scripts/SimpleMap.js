@@ -3,28 +3,83 @@ import { default as update } from "react-addons-update";
 import { default as FaSpinner } from "react-icons/lib/fa/spinner";
 
 import { default as ScriptjsLoader } from "react-google-maps/lib/async/ScriptjsLoader";
-import { GoogleMap, Marker } from "react-google-maps";
+import { GoogleMap, Marker, InfoWindow } from "react-google-maps";
+var MarkerDisplay = require('./MarkerDisplay');
 
 var SimpleMap = React.createClass({
   getInitialState: function() {
     return {
       center : { lat: 37.7749, lng: -122.4194 },
-      zoom : 10
+      zoom : 8,
+      markers: [
+        {
+          position: {
+            lat: 37.7749,
+            lng: -122.4194,
+          },
+          key: "Taiwan",
+          defaultAnimation: 2,
+          showInfo: false
+        }
+    ],
+    showInfo: false
     };
   },
 
   testDragend: function() {
     console.log(this.refs);
     var latLng = new google.maps.LatLng(39, -75);
+    console.log(latLng);
     console.log(this.refs.map.getBounds());
     console.log("Dragend Occurred.")
   },
 
+  // componentDidMount: function() {
+  //   this.setState({markers : [
+  //     {position: new google.maps.LatLng(39, -75) }
+  //     ]});
+  // },
+
   testZoomChanged: function() {
     console.log("Zoom Change Occurred.")
   },
+  handleMarkerRightclick: function(event) {
+    console.log("Marker firing");
+    this.state.markers[0].showInfo = true;
+    this.setState(this.state);
+    // this.setState({showInfo:true});
+    // this.setState({markers: [{
+    //   position: {
+    //     lat: 37.7749,
+    //     lng: -122.4194,
+    //   },
+    //   key: "Taiwan",
+    //   defaultAnimation: 2,
+    // }]});
+  },
+  renderInfoWindow: function(marker) {
+    return (
+       <InfoWindow content={marker.key}
+        onCloseclick={this.handleMarkerClose} />
+    );
+  },
+  handleMarkerClose: function() {
+    this.state.markers[0].showInfo = false;
+    this.setState(this.state);
+  },
 
   render: function() {
+    var rows = [];
+    for (var key in this.state.markers) {
+      console.log(key);
+        rows.push(
+          <Marker 
+            position={this.state.markers[key].position} 
+            onClick={this.handleMarkerRightclick}>
+            {this.state.markers[key].showInfo ? this.renderInfoWindow(this.state.markers[key]) : null}
+          </Marker>
+        );
+    }
     return (
       <div className="map-box">
           <ScriptjsLoader
@@ -54,6 +109,8 @@ var SimpleMap = React.createClass({
                 onDragend={this.testDragend}
                 onZoomChanged={this.testZoomChanged}
               >
+              {rows}
+              
               </GoogleMap>
             }/>
       </div>
@@ -62,3 +119,6 @@ var SimpleMap = React.createClass({
 });
 
 module.exports = SimpleMap;
+
+// <Marker position={{lat: 25.0112183, lng: 121.52067570000001 }}>
+//               </Marker>
