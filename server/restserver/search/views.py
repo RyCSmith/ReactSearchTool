@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
+def deliver_page(request):
+	return render(request, 'search/index.html', {})
 
 @api_view(['GET'])
 def dummy_fetch_search(request):
