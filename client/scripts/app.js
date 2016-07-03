@@ -4,6 +4,6 @@ window.React = React;
 var SearchTool = require('./SearchTool');
 
 ReactDOM.render(
-    <SearchTool searchURL='search/rest/' />,
+    <SearchTool searchURL='/search/rest/' />,
     document.getElementById('content')
 );

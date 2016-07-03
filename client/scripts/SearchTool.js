@@ -14,7 +14,7 @@ var SearchTool = React.createClass({
 
   doSearch: function(filters) {
     $.ajax({
-      url: this.props.url,
+      url: this.props.searchURL,
       type : 'GET', 
       dataType: 'json',
       data: filters,
@@ -31,6 +31,7 @@ var SearchTool = React.createClass({
 
   componentDidMount: function() {
     var searchParams = URLTools.getJsonFromUrl(false);
+    console.log(searchParams);
     this.doSearch(searchParams);
   },
 
