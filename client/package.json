@@ -7,7 +7,7 @@
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
-    "history": "^3.0.0",
+    "classnames": "^2.2.5",
     "react": "^15.1.0",
     "react-addons-update": "^15.1.0",
     "react-dom": "^15.1.0",

@@ -4,7 +4,6 @@ import { default as FaSpinner } from "react-icons/lib/fa/spinner";
 
 import { default as ScriptjsLoader } from "react-google-maps/lib/async/ScriptjsLoader";
 import { GoogleMap, Marker, InfoWindow } from "react-google-maps";
-var MarkerDisplay = require('./MarkerDisplay');
 
 var SimpleMap = React.createClass({
   getInitialState: function() {

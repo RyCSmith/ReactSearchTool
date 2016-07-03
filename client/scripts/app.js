@@ -10,7 +10,7 @@ import { browserHistory } from 'react-router';
 var SearchToolWrapper = React.createClass({
 	render: function () {
     return (
-        <SearchTool searchURL='/search/rest/' location={this.props.location} />
+        <SearchTool searchURL='/search/v1/dummysearch' location={this.props.location} />
     );
   }
 });
@@ -19,7 +19,7 @@ var SearchToolWrapper = React.createClass({
 
 ReactDOM.render((
 	<Router history={browserHistory} >
-		<Route path="/altsearch" component={SearchToolWrapper} />
+		<Route path="/search" component={SearchToolWrapper} />
     </Router>
     ),
     document.getElementById('content')
