@@ -4,6 +4,8 @@ var FilterBox = require('./FilterBox');
 var ResultsBox = require('./ResultsBox');
 var URLTools = require('./HomfieldURLTools');
 import { browserHistory } from 'react-router'
+import Loader from 'react-loader-advanced';
+import { default as FaSpinner } from "react-icons/lib/fa/spinner";
 
 var SearchTool = React.createClass({
 
@@ -54,17 +56,29 @@ var SearchTool = React.createClass({
   },
 
   render: function() {
+    var spinner2 = <div className="test" style={{ height: "100%" }}>
+                <FaSpinner
+                  style={{
+                    display: "block",
+                    width: 75,
+                    height: 75,
+                    margin: "auto",
+                    animation: "fa-spin 2s infinite linear",
+                  }}/>
+              </div>
     return (
-      <div className="search-box-outer-frame">
-        <div className="results-and-filters-box">
-            <FilterBox 
-              submitFiltersForSearch={this.doSearch} 
-              submitFiltersForQueryString={this.updateQueryString}
-              location={this.props.location} />
-            <ResultsBox data={this.state.results} loading={this.state.loading} location={this.props.location} />
+      <Loader message={spinner2} show={this.state.loading}>
+        <div className="search-box-outer-frame">
+          <div className="results-and-filters-box">
+              <FilterBox 
+                submitFiltersForSearch={this.doSearch} 
+                submitFiltersForQueryString={this.updateQueryString}
+                location={this.props.location} />
+              <ResultsBox data={this.state.results} loading={this.state.loading} location={this.props.location} />
+          </div>
+          <SimpleMap onCoordsChange={this.doSearch} />
         </div>
-        <SimpleMap onCoordsChange={this.doSearch} />
-      </div>
+      </Loader>
     );
   }
 });
