@@ -2,6 +2,9 @@ var React = require('react');
 var CheckBox = require('./CheckBox');
 
 var FilterBox = React.createClass({
+  // contextTypes: {
+  //   router: React.PropTypes.function
+  // },
 
   getInitialState: function() {
     return {
@@ -16,7 +19,8 @@ var FilterBox = React.createClass({
     var updatedFilters = this.state.filters;
     updatedFilters[filterName] = filterState;
     this.setState({filters : updatedFilters});
-    this.props.onFilterChange(updatedFilters);
+    this.props.submitFiltersForSearch(updatedFilters);
+    this.props.submitFiltersForQueryString(filterName, filterState);
   },
 
   render: function() {
@@ -24,7 +28,7 @@ var FilterBox = React.createClass({
     for (var key in this.state.filters) {
         rows.push(<CheckBox checkVal={this.state.filters[key]} nameVal={key} reportChange={this.handleFilterChange} />);
     }
-    
+
     return (
       <div className="filter-box">
         <h1>FilterBox</h1> 

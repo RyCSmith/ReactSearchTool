@@ -1,31 +1,37 @@
 var React = require('react');
 var Result = require('./Result');
 var classNames = require('classnames');
+import Loader from 'react-loader-advanced';
+import { default as FaSpinner } from "react-icons/lib/fa/spinner";
 
 var ResultsBox = React.createClass({
 
   getInitialState: function() {
     return {
-      loading: true, 
       data: []
     };
   },
 
-  componentDidMount: function() {
-    
-  },
-
   render: function() {
-    var overlay;
-    if (this.state.loading) {
-      <div id="overlay"><i className={classNames('fa', 'fa-spinner', 'fa-spin', 'spin-big')}></i></div>
-    }
+    var spinner2 = <div className="test" style={{ height: "100%" }}>
+                <FaSpinner
+                  style={{
+                    display: "block",
+                    width: 75,
+                    height: 75,
+                    margin: "auto",
+                    animation: "fa-spin 2s infinite linear",
+                  }}/>
+              </div>
     return (
-      <div className="results-box">
-        <div id="overlay"><i className={classNames('fa', 'fa-spinner', 'fa-spin', 'spin-big')}></i></div>
-        <h1>ResultsBox</h1> 
-        <Result />
-    </div>
+      <Loader message={spinner2} show={this.props.loading}>
+        <div className="results-box">
+          <div>ResultsBox</div> 
+            <Result />
+         </div>
+      </Loader>
+        
+     
     );
   }
 });
