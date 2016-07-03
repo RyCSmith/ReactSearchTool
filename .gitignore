@@ -1,0 +1,6 @@
+*.DS_Store
+server/bin/*
+server/include/*
+server/lib/*
+server/.Python
+server/pip-selfcheck.json
