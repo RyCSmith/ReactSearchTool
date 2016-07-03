@@ -1,0 +1,4 @@
+# using python 3.4 and pip3 within vitualenv
+pip install django
+pip install requests
+pip install djangorestframwork
